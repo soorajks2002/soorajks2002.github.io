@@ -8,21 +8,31 @@
 /* Import elegant fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-/* Theme variables */
+/* Min Theme Variables */
 :root {
+    /* Min Light Theme */
     --bg-color: #ffffff;
-    --text-color: #1a1a1a;
-    --text-muted: #6b7280;
-    --border-color: #e5e7eb;
-    --accent-color: #3b82f6;
+    --text-color: #212121;
+    --text-muted: #757575;
+    --border-color: #E0E0E0;
+    --accent-color: #1976D2;
+    --surface-color: #f6f6f6;
+    --surface-hover: #EEE;
+    --input-bg: #ffffff;
+    --code-bg: #f8f8f8;
 }
 
 [data-theme="dark"] {
-    --bg-color: #0f0f0f;
-    --text-color: #f9fafb;
-    --text-muted: #9ca3af;
-    --border-color: #374151;
-    --accent-color: #60a5fa;
+    /* Min Dark Theme */
+    --bg-color: #1f1f1f;
+    --text-color: #FAFAFA;
+    --text-muted: #7E7E7E;
+    --border-color: #383838;
+    --accent-color: #79b8ff;
+    --surface-color: #1A1A1A;
+    --surface-hover: #2A2A2A;
+    --input-bg: #2A2A2A;
+    --code-bg: #242424;
 }
 
 /* Base typography */
@@ -173,7 +183,7 @@ body {
     height: 320px;
     border-radius: 12px;
     overflow: hidden;
-    background-color: var(--border-color);
+    background-color: var(--surface-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -424,7 +434,7 @@ li::before {
 }
 
 .blog-article .content code {
-    background-color: var(--border-color);
+    background-color: var(--code-bg);
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
     font-family: 'Monaco', 'Menlo', monospace;
@@ -432,7 +442,7 @@ li::before {
 }
 
 .blog-article .content pre {
-    background-color: var(--border-color);
+    background-color: var(--code-bg);
     padding: 1.5rem;
     border-radius: 8px;
     overflow-x: auto;
@@ -513,7 +523,7 @@ li::before {
 .footer-social-links a:hover {
     color: var(--text-color);
     border-color: var(--accent-color);
-    background-color: var(--border-color);
+    background-color: var(--surface-hover);
 }
 
 .footer-copyright {
