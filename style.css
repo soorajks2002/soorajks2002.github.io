@@ -5,8 +5,8 @@
     box-sizing: border-box;
 }
 
-/* Import elegant fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+/* Import fonts optimized for readability and consistency */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:wght@400;500;600;700&family=Andika:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* Min Theme Variables */
 :root {
@@ -37,13 +37,13 @@
 
 /* Base typography */
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.65;
     color: var(--text-color);
     background-color: var(--bg-color);
     transition: background-color 0.3s ease, color 0.3s ease;
-    font-weight: 400;
+    font-weight: 450;
 }
 
 /* Top Navigation - Clean and Simple */
@@ -161,27 +161,30 @@ body {
 }
 
 .hero-content h1 {
-    font-family: 'Crimson Text', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 3.5rem;
-    font-weight: 400;
-    line-height: 1.2;
+    font-weight: 600;
+    line-height: 1.1;
     margin-bottom: 1rem;
     color: var(--text-color);
+    letter-spacing: -0.02em;
 }
 
 .hero-subtitle {
-    font-family: 'Crimson Text', serif;
+    font-family: 'Andika', sans-serif;
     font-style: italic;
     font-size: 1.4rem;
     color: var(--accent-color);
     margin-bottom: 1.75rem;
     font-weight: 400;
     line-height: 1.4;
+    letter-spacing: 0.01em;
 }
 
 .hero-description {
+    font-family: 'Andika', sans-serif;
     font-size: 1.05rem;
-    line-height: 1.6;
+    line-height: 1.7;
     color: var(--text-color);
     margin-bottom: 0;
     font-weight: 400;
@@ -239,12 +242,12 @@ h1,
 h2,
 h3,
 h4 {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 650;
     line-height: 1.3;
     color: var(--text-color);
     margin-bottom: 1.25rem;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
 }
 
 h1 {
@@ -281,18 +284,19 @@ h4 {
 
 p {
     font-size: 1.05rem;
-    line-height: 1.65;
+    line-height: 1.7;
     margin-bottom: 1.25rem;
     color: var(--text-color);
-    font-weight: 400;
+    font-weight: 450;
 }
 
 .lead {
+    font-family: 'Andika', sans-serif;
     font-size: 1.25rem;
     line-height: 1.6;
     color: var(--text-muted);
     margin-bottom: 2.5rem;
-    font-weight: 450;
+    font-weight: 400;
 }
 
 /* Links */
@@ -381,7 +385,8 @@ li {
     color: var(--text-color);
     list-style: none;
     font-size: 1.05rem;
-    line-height: 1.6;
+    line-height: 1.7;
+    font-weight: 450;
 }
 
 li::before {
@@ -401,6 +406,7 @@ li::before {
 
 /* Blog styles */
 .blog-intro {
+    font-family: 'Andika', sans-serif;
     margin-bottom: 3rem;
 }
 
@@ -449,8 +455,9 @@ li::before {
 .blog-post .excerpt {
     color: var(--text-color);
     font-size: 1.05rem;
-    line-height: 1.6;
+    line-height: 1.7;
     margin: 0;
+    font-weight: 450;
 }
 
 /* Blog article */
@@ -557,8 +564,8 @@ li::before {
     margin-bottom: 0.75rem;
     margin-top: 0;
     color: var(--text-color);
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 650;
 }
 
 .footer-quote {
