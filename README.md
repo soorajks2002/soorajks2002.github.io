@@ -7,8 +7,7 @@ A clean, minimal portfolio website showcasing my work as a software engineer. Bu
 - **Monochrome Design**: Clean black & white aesthetic with strategic color accents
 - **Dark/Light Theme**: Automatic theme switching with persistent preferences
 - **Responsive Layout**: Optimized for all devices and screen sizes
-- **Blog System**: Write posts in Markdown, generate static HTML
-- **Clean URLs**: No `.html` extensions (e.g., `/blog/my-post/` instead of `/blog/my-post.html`)
+- **Clean URLs**: No `.html` extensions for clean navigation
 - **Typography-First**: Beautiful typography with carefully selected fonts
 - **Fast & Lightweight**: Pure vanilla web technologies
 
@@ -29,7 +28,7 @@ This portfolio follows a minimalist design approach:
 - **Frontend**: HTML5, CSS3, Vanilla JavaScript
 - **Styling**: CSS Custom Properties, Flexbox, Grid
 - **Typography**: Noto Sans, Playfair Display, Saira, Asap, JetBrains Mono
-- **Blog**: Python-based Markdown to HTML generator
+
 - **Deployment**: GitHub Pages
 
 ## 📁 Project Structure
@@ -40,24 +39,14 @@ This portfolio follows a minimalist design approach:
 │   └── index.html         # Work experience (/experience/)
 ├── projects/
 │   └── index.html         # Project showcase (/projects/)
-├── blog/
-│   ├── index.html         # Blog listing (/blog/)
-│   ├── template.html      # Blog post template
-│   ├── markdown/
-│   │   ├── my-post.md     # Markdown source files
-│   │   └── getting-started.md # (organized under blog)
-│   ├── my-post/
-│   │   └── index.html     # Blog post (/blog/my-post/)
-│   └── getting-started/
-│       └── index.html     # Blog post (/blog/getting-started/)
+├── techstack/
+│   └── index.html         # Technology stack (/techstack/)
 ├── style.css              # Global styles
 ├── navbar.js              # Navigation component
 ├── footer.js              # Footer component
-├── scripts/
-│   └── generate_blog.py   # Enhanced blog generator
 └── assets/
     ├── profile/           # Hero images
-    └── images/            # Blog images
+    └── images/            # Website images
 ```
 
 ## 🔧 Development Setup
@@ -83,27 +72,7 @@ This portfolio follows a minimalist design approach:
 3. **Open browser**
    Navigate to `http://localhost:8000`
 
-## ✍️ Writing Blog Posts
 
-Create new blog posts easily with the enhanced Python generator:
-
-```bash
-# Create a markdown file in blog/markdown/ directory
-echo "---
-title: My New Post
-date: January 15, 2024
-excerpt: A brief description of your post
----
-
-# Hello World
-
-This is my **new blog post**!" > blog/markdown/my-new-post.md
-
-# Generate HTML with automatic blog listing update
-python3 scripts/generate_blog.py blog/markdown/my-new-post.md my-new-post
-```
-
-See [docs/BLOG-GENERATOR.md](docs/BLOG-GENERATOR.md) for detailed instructions.
 
 ## 🎨 Customization
 

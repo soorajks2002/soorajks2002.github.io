@@ -4,11 +4,8 @@ function createNavbar(currentPage = '') {
     const path = window.location.pathname;
     let pathPrefix = '';
 
-    if (path.includes('/blog/') && path.split('/').filter(p => p).length > 2) {
-        // Blog post (2 levels deep: /blog/post-name/)
-        pathPrefix = '../../';
-    } else if (path.includes('/blog/') || path.includes('/experience/') || path.includes('/projects/')) {
-        // Section pages (1 level deep: /blog/, /experience/, /projects/)
+    if (path.includes('/experience/') || path.includes('/projects/') || path.includes('/techstack/')) {
+        // Section pages (1 level deep: /experience/, /projects/, /techstack/)
         pathPrefix = '../';
     }
 
@@ -19,7 +16,7 @@ function createNavbar(currentPage = '') {
                 <ul class="nav-links">
                     <li><a href="${pathPrefix}experience/" ${currentPage === 'experience' ? 'class="active"' : ''}>Experience</a></li>
                     <li><a href="${pathPrefix}projects/" ${currentPage === 'projects' ? 'class="active"' : ''}>Projects</a></li>
-                    <li><a href="${pathPrefix}blog/" ${currentPage === 'blog' ? 'class="active"' : ''}>Blog</a></li>
+                    <li><a href="${pathPrefix}techstack/" ${currentPage === 'techstack' ? 'class="active"' : ''}>Techstack</a></li>
                 </ul>
                 <button class="theme-toggle" id="theme-toggle">
                     <span class="theme-icon">Dark</span>
@@ -78,8 +75,8 @@ function getCurrentPage() {
         return 'experience';
     } else if (cleanPath.includes('/projects')) {
         return 'projects';
-    } else if (cleanPath.includes('/blog')) {
-        return 'blog';
+    } else if (cleanPath.includes('/techstack')) {
+        return 'techstack';
     }
 
     return '';
