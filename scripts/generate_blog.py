@@ -108,18 +108,34 @@ def get_all_blog_posts():
     return posts
 
 
-def generate_pagination_controls(current_page, total_pages):
+def generate_pagination_controls(current_page, total_pages, file_path):
     """Generate HTML for pagination controls"""
     if total_pages <= 1:
         return ""
+
+    # Determine if we're on the main blog page or a pagination page
+    is_main_page = 'blog/index.html' in file_path
 
     controls = ['<div class="pagination">']
 
     # Previous button
     if current_page > 1:
-        prev_url = "../" if current_page == 2 else f"../page/{current_page - 1}/"
-        controls.append(
-            f'<a href="{prev_url}" class="pagination-btn">← Previous</a>')
+        if is_main_page:
+            # From main page, no previous
+            prev_url = None
+        elif current_page == 2:
+            # From page 2 back to main page
+            prev_url = "../../"
+        else:
+            # From page 3+ back to previous page
+            prev_url = f"../../page/{current_page - 1}/"
+
+        if prev_url:
+            controls.append(
+                f'<a href="{prev_url}" class="pagination-btn">← Previous</a>')
+        else:
+            controls.append(
+                '<span class="pagination-btn disabled">← Previous</span>')
     else:
         controls.append(
             '<span class="pagination-btn disabled">← Previous</span>')
@@ -130,14 +146,33 @@ def generate_pagination_controls(current_page, total_pages):
         if page == current_page:
             controls.append(f'<span class="page-number current">{page}</span>')
         else:
-            page_url = "../" if page == 1 else f"../page/{page}/"
-            controls.append(
-                f'<a href="{page_url}" class="page-number">{page}</a>')
+            if is_main_page:
+                # From main page to other pages
+                page_url = f"page/{page}/" if page > 1 else "#"
+            else:
+                # From pagination page
+                if page == 1:
+                    page_url = "../../"  # Back to main page
+                else:
+                    page_url = f"../../page/{page}/"
+
+            if page_url != "#":
+                controls.append(
+                    f'<a href="{page_url}" class="page-number">{page}</a>')
+            else:
+                controls.append(
+                    f'<span class="page-number current">{page}</span>')
     controls.append('</div>')
 
     # Next button
     if current_page < total_pages:
-        next_url = f"../page/{current_page + 1}/"
+        if is_main_page:
+            # From main page to page 2
+            next_url = f"page/{current_page + 1}/"
+        else:
+            # From pagination page to next page
+            next_url = f"../../page/{current_page + 1}/"
+
         controls.append(
             f'<a href="{next_url}" class="pagination-btn">Next →</a>')
     else:
@@ -147,15 +182,20 @@ def generate_pagination_controls(current_page, total_pages):
     return '\n'.join(controls)
 
 
-def generate_blog_listing_html(posts, current_page, total_pages):
+def generate_blog_listing_html(posts, current_page, total_pages, file_path):
     """Generate HTML for blog post listing with pagination"""
     if not posts:
         return '<p class="no-posts">No blog posts yet. Create your first post!</p>'
 
+    # Determine if we're on the main blog page or a pagination page
+    is_main_page = 'blog/index.html' in file_path
+    post_url_prefix = "" if is_main_page else "../../"
+
     post_html = []
     for post in posts:
+        post_url = f"{post_url_prefix}{post['url_path']}/"
         post_html.append(f'''                    <li class="blog-post">
-                        <h3><a href="{post['url_path']}/">{post['title']}</a></h3>
+                        <h3><a href="{post_url}">{post['title']}</a></h3>
                         <div class="date">{post['date']}</div>
                         <p class="excerpt">
                             {post['excerpt']}
@@ -163,7 +203,8 @@ def generate_blog_listing_html(posts, current_page, total_pages):
                     </li>''')
 
     posts_html = '\n'.join(post_html)
-    pagination_html = generate_pagination_controls(current_page, total_pages)
+    pagination_html = generate_pagination_controls(
+        current_page, total_pages, file_path)
 
     return f'''                <ul class="blog-posts">
 {posts_html}
@@ -214,8 +255,34 @@ def update_blog_page(posts, current_page, total_pages, file_path):
     with open(template_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
+    # Calculate relative path depth for assets
+    # Count directory levels from file to root
+    path_parts = blog_page_path.parts
+    # Remove 'index.html' from parts and count remaining directories
+    dir_parts = [p for p in path_parts if p != 'index.html']
+    depth = len(dir_parts)
+    path_prefix = '../' * depth
+
+    # Fix relative paths for all non-root pages
+    if depth > 0:
+        # Fix CSS path
+        content = content.replace(
+            'href="../style.css"', f'href="{path_prefix}style.css"')
+        content = content.replace(
+            'href="style.css"', f'href="{path_prefix}style.css"')
+        # Fix JS paths
+        content = content.replace(
+            'src="../navbar.js"', f'src="{path_prefix}navbar.js"')
+        content = content.replace(
+            'src="navbar.js"', f'src="{path_prefix}navbar.js"')
+        content = content.replace(
+            'src="../footer.js"', f'src="{path_prefix}footer.js"')
+        content = content.replace(
+            'src="footer.js"', f'src="{path_prefix}footer.js"')
+
     # Generate the posts HTML with pagination
-    posts_html = generate_blog_listing_html(posts, current_page, total_pages)
+    posts_html = generate_blog_listing_html(
+        posts, current_page, total_pages, file_path)
 
     # Replace everything from blog posts through any existing pagination
     combined_pattern = r'(<ul class="blog-posts">.*?</ul>).*?(?=\s*</section>)'
