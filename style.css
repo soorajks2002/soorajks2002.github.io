@@ -525,6 +525,93 @@ li::before {
     padding-bottom: 0;
 }
 
+/* Pagination styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--border-color);
+}
+
+.pagination-btn {
+    padding: 0.5rem 1rem;
+    background-color: var(--surface-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.pagination-btn:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border-color: var(--accent-color);
+    transform: translateY(-1px);
+}
+
+.pagination-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: var(--text-muted);
+}
+
+.pagination-btn.disabled:hover {
+    background-color: var(--surface-elevated);
+    color: var(--text-muted);
+    border-color: var(--border-color);
+    transform: none;
+}
+
+.page-numbers {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.page-number {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid var(--border-color);
+    background-color: var(--surface-elevated);
+    color: var(--text-color);
+    transition: all 0.2s ease;
+}
+
+.page-number:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border-color: var(--accent-color);
+    transform: translateY(-1px);
+}
+
+.page-number.current {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border-color: var(--accent-color);
+    cursor: default;
+}
+
+.no-posts {
+    text-align: center;
+    color: var(--text-muted);
+    font-style: italic;
+    margin: 2rem 0;
+    font-size: 1.1rem;
+}
+
 .blog-post h3 {
     margin-bottom: 0.5rem;
     margin-top: 0;

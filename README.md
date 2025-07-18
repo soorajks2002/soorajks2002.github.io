@@ -1,143 +1,154 @@
-# Portfolio Website
+# Sooraj Kumar S - Portfolio
 
-A clean, minimal portfolio website with dark/light mode and a markdown-based blog system.
+A clean, minimal portfolio website showcasing my work as a software engineer. Built with pure HTML, CSS, and JavaScript - no frameworks, no build process.
 
-## Features
+## 🌟 Features
 
-- **Clean Typography**: Uses Charter and Inter fonts for excellent readability
-- **Dark/Light Mode**: Automatic system preference detection with manual toggle
-- **Responsive Design**: Works perfectly on all devices
-- **Blog System**: Write posts in Markdown, convert to HTML
-- **Minimal Design**: Text-heavy, content-focused design
+- **Monochrome Design**: Clean black & white aesthetic with strategic color accents
+- **Dark/Light Theme**: Automatic theme switching with persistent preferences
+- **Responsive Layout**: Optimized for all devices and screen sizes
+- **Blog System**: Write posts in Markdown, generate static HTML
+- **Clean URLs**: No `.html` extensions (e.g., `/blog/my-post/` instead of `/blog/my-post.html`)
+- **Typography-First**: Beautiful typography with carefully selected fonts
+- **Fast & Lightweight**: Pure vanilla web technologies
 
-## Structure
+## 🚀 Live Demo
+
+Visit the live portfolio: [soorajks2002.github.io](https://soorajks2002.github.io)
+
+## 🎨 Design Philosophy
+
+This portfolio follows a minimalist design approach:
+- **Content First**: Focus on showcasing work and writing
+- **Readability**: Typography optimized for extended reading
+- **Accessibility**: High contrast, semantic HTML, keyboard navigation
+- **Performance**: Zero dependencies, fast loading times
+
+## 🛠️ Tech Stack
+
+- **Frontend**: HTML5, CSS3, Vanilla JavaScript
+- **Styling**: CSS Custom Properties, Flexbox, Grid
+- **Typography**: Noto Sans, Playfair Display, Saira, Asap, JetBrains Mono
+- **Blog**: Python-based Markdown to HTML generator
+- **Deployment**: GitHub Pages
+
+## 📁 Project Structure
 
 ```
-├── index.html          # Main portfolio page
-├── style.css           # Shared styles for all pages
+├── index.html              # Home page
+├── experience/
+│   └── index.html         # Work experience (/experience/)
+├── projects/
+│   └── index.html         # Project showcase (/projects/)
 ├── blog/
-│   ├── index.html      # Blog listing page
-│   ├── build.js        # Markdown to HTML converter
-│   ├── *.md            # Markdown blog posts
-│   └── *.html          # Generated HTML blog posts
-└── README.md
+│   ├── index.html         # Blog listing (/blog/)
+│   ├── template.html      # Blog post template
+│   ├── markdown/
+│   │   ├── my-post.md     # Markdown source files
+│   │   └── getting-started.md # (organized under blog)
+│   ├── my-post/
+│   │   └── index.html     # Blog post (/blog/my-post/)
+│   └── getting-started/
+│       └── index.html     # Blog post (/blog/getting-started/)
+├── style.css              # Global styles
+├── navbar.js              # Navigation component
+├── footer.js              # Footer component
+├── scripts/
+│   └── generate_blog.py   # Enhanced blog generator
+└── assets/
+    ├── profile/           # Hero images
+    └── images/            # Blog images
 ```
 
-## Writing Blog Posts
+## 🔧 Development Setup
 
-### 1. Create a Markdown File
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/soorajks2002/soorajks2002.github.io.git
+   cd soorajks2002.github.io
+   ```
 
-Create a new `.md` file in the `blog/` directory:
+2. **Serve locally** (choose one)
+   ```bash
+   # Using Python
+   python -m http.server 8000
+   
+   # Using Node.js
+   npx serve .
+   
+   # Using PHP
+   php -S localhost:8000
+   ```
 
-```markdown
-# Your Blog Post Title
+3. **Open browser**
+   Navigate to `http://localhost:8000`
 
-**Published:** January 15, 2024
+## ✍️ Writing Blog Posts
 
-Your blog post content here. You can use:
-
-## Headers
-
-### Subheaders
-
-**Bold text** and `inline code`.
-
-```javascript
-// Code blocks with syntax highlighting
-function example() {
-  return "Hello, world!";
-}
-```
-
-- Bullet points
-- Lists work great
-
-[Links](https://example.com) are supported too.
-```
-
-### 2. Convert to HTML
-
-Run the build script to convert your markdown to HTML:
+Create new blog posts easily with the enhanced Python generator:
 
 ```bash
-cd blog
-node build.js your-post-name.md
+# Create a markdown file in blog/markdown/ directory
+echo "---
+title: My New Post
+date: January 15, 2024
+excerpt: A brief description of your post
+---
+
+# Hello World
+
+This is my **new blog post**!" > blog/markdown/my-new-post.md
+
+# Generate HTML with automatic blog listing update
+python3 scripts/generate_blog.py blog/markdown/my-new-post.md my-new-post
 ```
 
-This creates `your-post-name.html` with the proper styling and navigation.
+See [docs/BLOG-GENERATOR.md](docs/BLOG-GENERATOR.md) for detailed instructions.
 
-### 3. Update Blog Index
+## 🎨 Customization
 
-Add your new post to `blog/index.html` and the main `index.html` blog section.
-
-## Customization
-
-### Colors
-
-Edit the CSS variables in `style.css`:
+The design system uses CSS custom properties for easy theming:
 
 ```css
 :root {
-  --color-bg: #ffffff;
-  --color-text: #2a2a2a;
-  --color-accent: #2563eb;
-  /* ... */
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --accent-color: #8b5cf6;  /* Light mode highlight */
 }
 
 [data-theme="dark"] {
-  --color-bg: #0f0f0f;
-  --color-text: #e5e5e5;
-  --color-accent: #60a5fa;
-  /* ... */
+  --bg-color: #1a1a1a;
+  --text-color: #f5f5f5;
+  --accent-color: #fbbf24;  /* Dark mode highlight */
 }
 ```
 
-### Content
+## 🚢 Deployment
 
-Update the following sections in `index.html`:
-- About Me
-- Work Experience  
-- Projects
-- Contact links
+This site is deployed on GitHub Pages:
 
-### Fonts
+1. **Fork or clone** this repository
+2. **Customize** content and styling
+3. **Push to GitHub** (ensure repository is named `yourusername.github.io`)
+4. **Enable GitHub Pages** in repository settings
 
-The site uses:
-- **Charter**: For body text (serif, excellent for reading)
-- **Inter**: For headings and UI elements (sans-serif, modern)
-- **Monaco/Menlo**: For code blocks (monospace)
+## 📄 License
 
-To change fonts, update the Google Fonts link and CSS font-family declarations.
+This project is open source and available under the [MIT License](LICENSE).
 
-## Deployment
+## 🤝 Contributing
 
-This is a static site that can be deployed anywhere:
+Feel free to:
+- Fork this repository for your own portfolio
+- Submit issues for bugs or suggestions
+- Create pull requests for improvements
 
-- **GitHub Pages**: Push to your `username.github.io` repository
-- **Netlify**: Drag and drop the folder or connect your repo
-- **Vercel**: Deploy directly from GitHub
-- **Traditional hosting**: Upload files via FTP
+## 📬 Contact
 
-## Blog Workflow
-
-1. Write your post in markdown (`blog/post-name.md`)
-2. Convert to HTML (`node build.js post-name.md`)
-3. Add the post to your blog index pages
-4. Commit and push to deploy
-
-## Tips
-
-- Keep the markdown files for editing, but deploy the HTML versions
-- The build script is basic - consider using `marked` or `remark` for production
-- Images can be stored in a `blog/assets/` folder
-- The design prioritizes readability and simplicity over flashy effects
-
-## Browser Support
-
-- Modern browsers (Chrome, Firefox, Safari, Edge)
-- CSS Grid and CSS Custom Properties required
-- JavaScript required for dark mode toggle
+- **Website**: [soorajks2002.github.io](https://soorajks2002.github.io)
+- **GitHub**: [@soorajks2002](https://github.com/soorajks2002)
+- **Email**: soorajks2002@gmail.com
 
 ---
 
-Built with HTML, CSS, and a touch of JavaScript. No frameworks, no build process required. 
+*Built with ❤️ using vanilla web technologies* 

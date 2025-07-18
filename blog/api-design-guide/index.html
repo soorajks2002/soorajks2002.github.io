@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST API Design Guide - soorajks2002</title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div id="navbar-container"></div>
+
+        <main class="content">
+            <article class="blog-article">
+                <div class="back-link">
+                    <a href="../">← Back to Blog</a>
+                </div>
+
+                <header>
+                    <h1>REST API Design Guide</h1>
+                    <div class="meta">January 30, 2024</div>
+                </header>
+
+                <div class="content">
+                    <h1>REST API Design Guide</h1>
+
+<p>Designing a great API is both an art and a science. A well-designed API can make developers' lives easier and drive adoption of your platform.</p>
+
+<h2>URL Structure</h2>
+
+<h3>Resource-Based URLs</h3>
+<code>`</code>
+<p>GET /users           # Get all users</p>
+<p>GET /users/123       # Get specific user</p>
+<p>POST /users          # Create new user</p>
+<p>PUT /users/123       # Update user</p>
+<p>DELETE /users/123    # Delete user</p>
+<code>`</code>
+
+<h3>Nested Resources</h3>
+<code>`</code>
+<p>GET /users/123/posts       # Get user's posts</p>
+<p>POST /users/123/posts      # Create post for user</p>
+<code>`</code>
+
+<h2>HTTP Methods</h2>
+
+<ul>
+<li><strong>GET</strong>: Retrieve data (idempotent)</li>
+<li><strong>POST</strong>: Create new resources</li>
+<li><strong>PUT</strong>: Update entire resource (idempotent)</li>
+<li><strong>PATCH</strong>: Partial updates</li>
+<li><strong>DELETE</strong>: Remove resources (idempotent)</li>
+</ul>
+
+<h2>Status Codes</h2>
+
+<h3>Success Codes</h3>
+<ul>
+<li><strong>200 OK</strong>: Successful GET, PUT, PATCH</li>
+<li><strong>201 Created</strong>: Successful POST</li>
+<li><strong>204 No Content</strong>: Successful DELETE</li>
+</ul>
+
+<h3>Client Error Codes</h3>
+<ul>
+<li><strong>400 Bad Request</strong>: Invalid request syntax</li>
+<li><strong>401 Unauthorized</strong>: Authentication required</li>
+<li><strong>403 Forbidden</strong>: Access denied</li>
+<li><strong>404 Not Found</strong>: Resource doesn't exist</li>
+<li><strong>422 Unprocessable Entity</strong>: Validation errors</li>
+</ul>
+
+<h2>Response Format</h2>
+
+<h3>Consistent Structure</h3>
+<code>`</code>json
+<p>{</p>
+<p>"success": true,</p>
+<p>"data": {</p>
+<p>"id": 123,</p>
+<p>"name": "John Doe",</p>
+<p>"email": "john@example.com"</p>
+<p>},</p>
+<p>"meta": {</p>
+<p>"timestamp": "2024-01-30T10:00:00Z"</p>
+<p>}</p>
+<p>}</p>
+<code>`</code>
+
+<h3>Error Responses</h3>
+<code>`</code>json
+<p>{</p>
+<p>"success": false,</p>
+<p>"error": {</p>
+<p>"code": "VALIDATION_ERROR",</p>
+<p>"message": "Email is required",</p>
+<p>"details": {</p>
+<p>"field": "email",</p>
+<p>"type": "required"</p>
+<p>}</p>
+<p>}</p>
+<p>}</p>
+<code>`</code>
+
+<h2>Pagination</h2>
+
+<h3>Limit/Offset</h3>
+<code>`</code>
+<p>GET /users?limit=20&offset=40</p>
+<code>`</code>
+
+<h3>Cursor-Based</h3>
+<code>`</code>
+<p>GET /users?limit=20&cursor=eyJ1c2VyX2lkIjoxMjN9</p>
+<code>`</code>
+
+<h2>Versioning</h2>
+
+<h3>URL Versioning</h3>
+<code>`</code>
+<p>GET /v1/users</p>
+<p>GET /v2/users</p>
+<code>`</code>
+
+<h3>Header Versioning</h3>
+<code>`</code>
+<p>Accept: application/vnd.api+json;version=1</p>
+<code>`</code>
+
+<h2>Security Best Practices</h2>
+
+<ol>
+<li><strong>Authentication</strong>: Use JWT or OAuth 2.0</li>
+<li><strong>Rate Limiting</strong>: Prevent abuse</li>
+<li><strong>Input Validation</strong>: Sanitize all inputs</li>
+<li><strong>HTTPS Only</strong>: Encrypt all communications</li>
+<li><strong>CORS</strong>: Configure properly for web apps</li>
+</ol>
+
+<p>Great APIs are intuitive, consistent, and well-documented. Follow these principles to create APIs that developers love!</p>
+                </div>
+            </article>
+        </main>
+
+        <div id="footer-container"></div>
+    </div>
+
+    <script src="../../navbar.js"></script>
+    <script src="../../footer.js"></script>
+</body>
+
+</html>
