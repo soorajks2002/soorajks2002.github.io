@@ -5,8 +5,8 @@
     box-sizing: border-box;
 }
 
-/* Import Sofia Sans font for consistent typography */
-@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&display=swap');
+/* Import Istok Web (body), Sofia Sans (nav/footer), JetBrains Mono (fallback for brand) */
+@import url('https://fonts.googleapis.com/css2?family=Istok+Web:wght@400;700&family=Sofia+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* Modern Sophisticated Theme Variables */
 :root {
@@ -50,13 +50,13 @@
     /* Dark Theme - Neutral Greys */
     --bg-color: #1a1a1a;
     --bg-secondary: #262626;
-    --text-color: #f5f5f5;
-    --text-secondary: #e5e5e5;
+    --text-color: #d2d0d0;
+    --text-secondary: #c8c6c6;
     --text-muted: #a3a3a3;
     --text-light: #737373;
 
     /* Consistent Dark Accent */
-    --accent-color: #f5f5f5;
+    --accent-color: #e5e7eb;
 
     /* Dark Grey Neutrals */
     --border-color: #525252;
@@ -68,7 +68,7 @@
     /* Dark Interactive States */
     --input-bg: #262626;
     --input-border: #525252;
-    --input-focus: #f5f5f5;
+    --input-focus: #e5e7eb;
 
     /* Dark Code & Technical */
     --code-bg: #262626;
@@ -85,7 +85,7 @@
 
 /* Base typography */
 body {
-    font-family: 'Sofia Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Istok Web', -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif;
     font-size: 16px;
     line-height: 1.65;
     color: var(--text-color);
@@ -105,7 +105,7 @@ body {
 
 /* Brand - Simple Text */
 .nav-brand {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Google Sans Code', 'Google Sans Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     font-size: 1.25rem;
     font-weight: 500;
     color: var(--text-color);
@@ -143,6 +143,7 @@ body {
 }
 
 .nav-links a {
+    font-family: 'Sofia Sans', -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif;
     color: var(--text-color);
     text-decoration: none;
     font-weight: 400;
@@ -169,13 +170,13 @@ body {
 }
 
 .theme-toggle {
+    font-family: 'Sofia Sans', -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif;
     background: none;
     border: none;
     color: var(--text-color);
     cursor: pointer;
     font-size: 1.05rem;
     font-weight: 400;
-    font-family: inherit;
     transition: opacity 0.2s ease;
     margin-left: 2rem;
 }
@@ -212,7 +213,7 @@ body {
 }
 
 .hero-content h1 {
-    font-family: 'Sofia Sans', sans-serif;
+    font-family: 'Google Sans Code', 'Google Sans Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     font-size: 3.5rem;
     font-weight: 600;
     line-height: 1.1;
@@ -226,7 +227,7 @@ body {
 }
 
 .hero-description {
-    font-family: 'Sofia Sans', sans-serif;
+    font-family: 'Istok Web', -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif;
     font-size: 1.05rem;
     line-height: 1.7;
     color: var(--text-color);
@@ -286,7 +287,7 @@ h1,
 h2,
 h3,
 h4 {
-    font-family: 'Sofia Sans', sans-serif;
+    font-family: 'Istok Web', -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif;
     font-weight: 650;
     line-height: 1.3;
     color: var(--text-color);
@@ -335,7 +336,7 @@ p {
 }
 
 .lead {
-    font-family: 'Sofia Sans', sans-serif;
+    font-family: 'Istok Web', -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif;
     font-size: 1.25rem;
     line-height: 1.6;
     color: var(--text-muted);
@@ -403,7 +404,7 @@ a:hover {
     margin-top: 0;
     font-size: 1.35rem;
     font-weight: 600;
-    font-family: 'Sofia Sans', sans-serif;
+    font-family: 'Istok Web', -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif;
     color: var(--text-color);
     line-height: 1.3;
 }
@@ -502,12 +503,16 @@ li::before {
     margin: 0 auto;
 }
 
+.footer {
+    font-family: 'Sofia Sans', -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif;
+}
+
 .footer h3 {
     font-size: 1.2rem;
     margin-bottom: 0.75rem;
     margin-top: 0;
     color: var(--text-color);
-    font-family: 'Sofia Sans', sans-serif;
+    font-family: 'Sofia Sans', -apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif;
     font-weight: 650;
 }
 
