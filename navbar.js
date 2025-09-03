@@ -5,24 +5,23 @@ function createNavbar(currentPage = '') {
     let pathPrefix = '';
 
     if (path.includes('/experience/') || path.includes('/projects/') || path.includes('/techstack/')) {
-        // Section pages (1 level deep: /experience/, /projects/, /techstack/)
         pathPrefix = '../';
     }
 
     return `
-        <nav class="top-nav">
+        <aside class="sidebar">
             <a href="${pathPrefix}" class="nav-brand ${currentPage === 'home' ? 'active' : ''}">soorajks2002</a>
-            <div class="nav-right">
+            <nav>
                 <ul class="nav-links">
                     <li><a href="${pathPrefix}experience/" ${currentPage === 'experience' ? 'class="active"' : ''}>Experience</a></li>
                     <li><a href="${pathPrefix}projects/" ${currentPage === 'projects' ? 'class="active"' : ''}>Projects</a></li>
                     <li><a href="${pathPrefix}techstack/" ${currentPage === 'techstack' ? 'class="active"' : ''}>Techstack</a></li>
                 </ul>
-                <button class="theme-toggle" id="theme-toggle">
-                    <span class="theme-icon">Dark</span>
-                </button>
-            </div>
-        </nav>
+            </nav>
+            <button class="theme-toggle" id="theme-toggle">
+                <span class="theme-icon">Dark</span>
+            </button>
+        </aside>
     `;
 }
 
@@ -42,19 +41,22 @@ function initializeThemeToggle() {
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = themeToggle.querySelector('.theme-icon');
     const body = document.body;
+    const root = document.documentElement;
 
-    // Check for saved theme preference or default to light
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    body.setAttribute('data-theme', savedTheme);
+    // Determine initial theme from documentElement (set by preload) or localStorage
+    const initial = root.getAttribute('data-theme') || localStorage.getItem('theme') || 'light';
+    body.setAttribute('data-theme', initial);
+    root.setAttribute('data-theme', initial);
 
     // Set initial button text - show the option to switch TO
-    themeIcon.textContent = savedTheme === 'dark' ? 'Light' : 'Dark';
+    themeIcon.textContent = initial === 'dark' ? 'Light' : 'Dark';
 
     themeToggle.addEventListener('click', () => {
-        const currentTheme = body.getAttribute('data-theme');
+        const currentTheme = root.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
         body.setAttribute('data-theme', newTheme);
+        root.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
 
         // Update button text to show the option to switch TO
@@ -65,25 +67,58 @@ function initializeThemeToggle() {
 // Auto-detect current page based on URL
 function getCurrentPage() {
     const path = window.location.pathname;
-
-    // Remove trailing slash for consistent matching
     const cleanPath = path.replace(/\/$/, '');
 
-    if (cleanPath === '' || cleanPath === '/index.html') {
-        return 'home';
-    } else if (cleanPath.includes('/experience')) {
-        return 'experience';
-    } else if (cleanPath.includes('/projects')) {
-        return 'projects';
-    } else if (cleanPath.includes('/techstack')) {
-        return 'techstack';
-    }
+    if (cleanPath.includes('/experience')) return 'experience';
+    if (cleanPath.includes('/projects')) return 'projects';
+    if (cleanPath.includes('/techstack')) return 'techstack';
 
-    return '';
+    // Treat any other path as home (covers GitHub Pages base paths)
+    return 'home';
 }
 
 // Run when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const currentPage = getCurrentPage();
+    // Add a page-specific class to body for layout tweaks
+    document.body.classList.add(`page-${currentPage || 'home'}`);
     insertNavbar(currentPage);
+
+    // Smooth page transitions
+    setupPageTransitions();
 }); 
+
+// Simple cross-page fade transition
+function setupPageTransitions() {
+    const body = document.body;
+
+    // Fade-in on load
+    body.classList.add('page-enter');
+    requestAnimationFrame(() => {
+        // Next frame: remove to transition to visible
+        body.classList.remove('page-enter');
+    });
+
+    // Delegate clicks for internal links to add fade-out
+    const anchors = Array.from(document.querySelectorAll('a[href]'));
+    anchors.forEach((a) => {
+        const url = new URL(a.href, window.location.href);
+        const isSameOrigin = url.origin === window.location.origin;
+        const isSamePageHash = url.pathname === window.location.pathname && url.hash;
+        const isExternal = a.target === '_blank' || a.href.startsWith('mailto:') || a.href.startsWith('tel:');
+
+        if (!isSameOrigin || isExternal || isSamePageHash) return;
+
+        a.addEventListener('click', (e) => {
+            // Only intercept left-click without modifier keys
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+            e.preventDefault();
+            const href = a.getAttribute('href');
+            body.classList.add('page-exit');
+            // Navigate after the transition
+            setTimeout(() => {
+                window.location.href = href;
+            }, 220);
+        });
+    });
+}

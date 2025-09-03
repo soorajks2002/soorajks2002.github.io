@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Experience - Sooraj Kumar S</title>
 
+    <script>
+      (function() {
+        try {
+          var t = localStorage.getItem('theme');
+          if (!t) { t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) { /* ignore */ }
+      })();
+    </script>
     <link rel="stylesheet" href="../style.css">
 </head>
 
@@ -24,7 +33,7 @@
             <section class="section">
                 <article class="job">
                     <h3>Senior Software Engineer</h3>
-                    <div class="job-meta">TechCorp Inc. • March 2022 - Present</div>
+                    <div class="job-meta"><a class="org-link" href="https://example.com" target="_blank" rel="noopener">TechCorp Inc.</a> • March 2022 - Present</div>
                     <p>
                         Leading development of microservices architecture serving over 1 million daily active users.
                         Responsible for technical decision-making, mentoring junior developers, and driving
@@ -43,7 +52,7 @@
 
                 <article class="job">
                     <h3>Full Stack Developer</h3>
-                    <div class="job-meta">StartupXYZ • June 2020 - February 2022</div>
+                    <div class="job-meta"><a class="org-link" href="https://example.com" target="_blank" rel="noopener">StartupXYZ</a> • June 2020 - February 2022</div>
                     <p>
                         Developed and maintained customer-facing applications serving 50,000+ users.
                         Worked closely with product and design teams to implement new features and
@@ -63,7 +72,7 @@
 
                 <article class="job">
                     <h3>Junior Software Developer</h3>
-                    <div class="job-meta">WebSolutions Ltd. • August 2019 - May 2020</div>
+                    <div class="job-meta"><a class="org-link" href="https://example.com" target="_blank" rel="noopener">WebSolutions Ltd.</a> • August 2019 - May 2020</div>
                     <p>
                         Contributed to client projects and internal tools while learning modern web development
                         practices. Gained experience with agile methodologies, version control, and collaborative
