@@ -27,4 +27,4 @@ function insertFooter() {
 }
 
 // Run when DOM is loaded
-document.addEventListener('DOMContentLoaded', insertFooter); 
+document.addEventListener('DOMContentLoaded', insertFooter);

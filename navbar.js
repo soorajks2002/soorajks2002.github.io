@@ -1,3 +1,5 @@
+const MODE_ICON = '☀';
+
 // Navbar component for all pages
 function createNavbar(currentPage = '') {
     // Determine path prefix based on directory depth
@@ -9,19 +11,22 @@ function createNavbar(currentPage = '') {
     }
 
     return `
-        <aside class="sidebar">
-            <a href="${pathPrefix}" class="nav-brand ${currentPage === 'home' ? 'active' : ''}">soorajks2002</a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="${pathPrefix}experience/" ${currentPage === 'experience' ? 'class="active"' : ''}>Experience</a></li>
-                    <li><a href="${pathPrefix}projects/" ${currentPage === 'projects' ? 'class="active"' : ''}>Projects</a></li>
-                    <li><a href="${pathPrefix}techstack/" ${currentPage === 'techstack' ? 'class="active"' : ''}>Techstack</a></li>
-                </ul>
-            </nav>
-            <button class="theme-toggle" id="theme-toggle">
-                <span class="theme-icon">Dark</span>
-            </button>
-        </aside>
+        <header class="top-nav">
+            <div class="top-nav__inner">
+                <a href="${pathPrefix}" class="nav-brand ${currentPage === 'home' ? 'active' : ''}">soorajks2002</a>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="${pathPrefix}experience/" ${currentPage === 'experience' ? 'class="active"' : ''}>Experience</a></li>
+                        <li><a href="${pathPrefix}projects/" ${currentPage === 'projects' ? 'class="active"' : ''}>Projects</a></li>
+                        <li><a href="${pathPrefix}techstack/" ${currentPage === 'techstack' ? 'class="active"' : ''}>Techstack</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle" id="theme-toggle" type="button" data-theme-target="dark" aria-live="polite" aria-label="Switch theme">
+                    <span class="sr-only">Switch theme</span>
+                    <span class="theme-icon" aria-hidden="true">${MODE_ICON}</span>
+                </button>
+            </div>
+        </header>
     `;
 }
 
@@ -39,17 +44,26 @@ function insertNavbar(currentPage = '') {
 // Theme toggle functionality (moved from script.js)
 function initializeThemeToggle() {
     const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = themeToggle.querySelector('.theme-icon');
+    if (!themeToggle) return;
+
     const body = document.body;
     const root = document.documentElement;
+    const srOnly = themeToggle.querySelector('.sr-only');
+
+    const updateButtonState = (activeTheme) => {
+        const targetTheme = activeTheme === 'dark' ? 'light' : 'dark';
+        themeToggle.setAttribute('data-theme-target', targetTheme);
+        themeToggle.setAttribute('aria-label', `Switch to ${targetTheme} theme`);
+        if (srOnly) {
+            srOnly.textContent = `Switch to ${targetTheme} theme`;
+        }
+    };
 
     // Determine initial theme from documentElement (set by preload) or localStorage
     const initial = root.getAttribute('data-theme') || localStorage.getItem('theme') || 'light';
     body.setAttribute('data-theme', initial);
     root.setAttribute('data-theme', initial);
-
-    // Set initial button text - show the option to switch TO
-    themeIcon.textContent = initial === 'dark' ? 'Light' : 'Dark';
+    updateButtonState(initial);
 
     themeToggle.addEventListener('click', () => {
         const currentTheme = root.getAttribute('data-theme');
@@ -58,9 +72,7 @@ function initializeThemeToggle() {
         body.setAttribute('data-theme', newTheme);
         root.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
-
-        // Update button text to show the option to switch TO
-        themeIcon.textContent = newTheme === 'dark' ? 'Light' : 'Dark';
+        updateButtonState(newTheme);
     });
 }
 
