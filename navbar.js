@@ -1,4 +1,4 @@
-const MODE_ICON = '☀';
+const MODE_ICON = '<span class="mode-icon material-symbols-rounded">brightness_4</span>';
 
 // Navbar component for all pages
 function createNavbar(currentPage = '') {
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Smooth page transitions
     setupPageTransitions();
-}); 
+});
 
 // Simple cross-page fade transition
 function setupPageTransitions() {
