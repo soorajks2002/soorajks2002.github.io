@@ -43,7 +43,6 @@ This portfolio follows a minimalist design approach:
 │   └── index.html         # Technology stack (/techstack/)
 ├── style.css              # Global styles
 ├── navbar.js              # Navigation component
-├── footer.js              # Footer component
 └── assets/
     ├── profile/           # Hero images
     └── images/            # Website images
