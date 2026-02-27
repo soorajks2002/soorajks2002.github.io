@@ -1,4 +1,9 @@
-const MODE_ICON = '<span class="mode-icon material-symbols-rounded">brightness_4</span>';
+const THEME_ICON = `
+  <svg class="mode-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <circle cx="12" cy="12" r="8"></circle>
+    <path d="M12 4v16"></path>
+  </svg>
+`;
 
 // Navbar component for all pages
 function createNavbar(currentPage = '') {
@@ -23,7 +28,7 @@ function createNavbar(currentPage = '') {
                 </nav>
                 <button class="theme-toggle" id="theme-toggle" type="button" data-theme-target="dark" aria-live="polite" aria-label="Switch theme">
                     <span class="sr-only">Switch theme</span>
-                    <span class="theme-icon" aria-hidden="true">${MODE_ICON}</span>
+                    <span class="theme-icon" aria-hidden="true">${THEME_ICON}</span>
                 </button>
             </div>
         </header>

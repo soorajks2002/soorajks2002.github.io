@@ -282,24 +282,6 @@ body.page-exit {
     outline-offset: 3px;
 }
 
-.material-symbols-rounded {
-    font-family: 'Material Symbols Rounded';
-    font-weight: normal;
-    font-style: normal;
-    font-size: inherit;
-    line-height: 1;
-    letter-spacing: normal;
-    text-transform: none;
-    display: inline-block;
-    white-space: nowrap;
-    word-wrap: normal;
-    direction: ltr;
-    font-feature-settings: 'liga';
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    -webkit-font-feature-settings: 'liga';
-    -webkit-font-smoothing: antialiased;
-}
-
 .theme-toggle .theme-icon {
     display: inline-flex;
     align-items: center;
@@ -307,11 +289,15 @@ body.page-exit {
 }
 
 .theme-toggle .mode-icon {
-    font-family: 'Material Symbols Rounded';
-    font-size: 1.45rem;
-    line-height: 1;
+    width: 1.3rem;
+    height: 1.3rem;
+    display: block;
     color: var(--text-color);
-    font-variation-settings: 'OPSZ' 24, 'wght' 400, 'FILL' 0, 'GRAD' 0;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
     transition: color var(--duration-fast) var(--ease-smooth), transform var(--duration-fast) var(--ease-emphasis);
 }
 
@@ -398,6 +384,15 @@ body.page-home .hero {
     color: var(--highlight-color);
     font-family: var(--font-code);
     font-weight: var(--weight-bold);
+}
+
+/* Homepage-specific name highlight */
+body.page-home .highlight {
+    color: #c62828;
+}
+
+[data-theme="dark"] body.page-home .highlight {
+    color: #ff6b6b;
 }
 
 .hero-description {
@@ -816,6 +811,102 @@ blockquote {
     outline-offset: 2px;
 }
 
+/* Techstack blocks */
+.stack-blocks {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.stack-blocks .stack-block {
+    margin-bottom: 0;
+}
+
+.content ul.stack-pills {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.42rem;
+}
+
+.content ul.stack-pills li {
+    margin: 0;
+    padding: 0.26rem 0.58rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--surface-elevated);
+    color: var(--text-color);
+    font-size: 0.82rem;
+    line-height: 1.2;
+    transition: border-color var(--duration-fast) var(--ease-smooth), background-color var(--duration-fast) var(--ease-smooth);
+}
+
+.content ul.stack-pills li:hover {
+    border-color: var(--accent-color);
+    background: var(--surface-hover);
+}
+
+/* Projects pagination */
+.projects-pagination {
+    margin-top: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.pagination-pages {
+    display: flex;
+    align-items: center;
+    gap: 0.38rem;
+    flex-wrap: wrap;
+}
+
+.pagination-btn,
+.pagination-page {
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+    background: var(--surface-elevated);
+    color: var(--text-color);
+    font-family: var(--font-nav);
+    font-size: 0.78rem;
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.04em;
+    padding: 0.42rem 0.66rem;
+    cursor: pointer;
+    transition: border-color var(--duration-fast) var(--ease-smooth), background-color var(--duration-fast) var(--ease-smooth), transform var(--duration-fast) var(--ease-emphasis);
+}
+
+.pagination-btn:hover,
+.pagination-page:hover {
+    border-color: var(--accent-color);
+    background: var(--surface-hover);
+    transform: translateY(-1px);
+}
+
+.pagination-page.is-active {
+    background: var(--text-color);
+    color: var(--bg-color);
+    border-color: var(--text-color);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.pagination-summary {
+    margin-left: auto;
+    color: var(--text-muted);
+    font-family: var(--font-meta);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
 /* Lists */
 /* Markdown-like lists inside content */
 .content ul {
@@ -1060,6 +1151,36 @@ blockquote {
     .project-links {
         flex-direction: column;
         gap: 1rem;
+    }
+
+    .stack-blocks {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .content ul.stack-pills {
+        gap: 0.34rem;
+    }
+
+    .content ul.stack-pills li {
+        font-size: 0.78rem;
+        padding: 0.22rem 0.48rem;
+    }
+
+    .projects-pagination {
+        gap: 0.5rem;
+    }
+
+    .pagination-btn,
+    .pagination-page {
+        font-size: 0.74rem;
+        padding: 0.38rem 0.58rem;
+    }
+
+    .pagination-summary {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0.2rem;
     }
 
     .socials-section {
