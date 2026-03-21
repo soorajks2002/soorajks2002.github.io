@@ -34,6 +34,9 @@
             } catch (e) { /* ignore */ }
         })();
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Mozilla+Headline:wght@200..700&family=Mozilla+Text:wght@200..700&display=swap">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -53,8 +56,40 @@
                     </div>
                 </div>
                 <div class="hero-photo">
-                    <img src="assets/profile/light.png" alt="Sooraj Kumar S" class="hero-photo-light" />
-                    <img src="assets/profile/dark.png" alt="Sooraj Kumar S" class="hero-photo-dark" />
+                    <img
+                        id="hero-image"
+                        alt="Sooraj Kumar S"
+                        width="560"
+                        height="560"
+                        sizes="280px"
+                        fetchpriority="high"
+                        decoding="async"
+                        data-light-src="assets/profile/light-280.png"
+                        data-light-srcset="assets/profile/light-280.png 280w, assets/profile/light-560.png 560w"
+                        data-dark-src="assets/profile/dark-280.png"
+                        data-dark-srcset="assets/profile/dark-280.png 280w, assets/profile/dark-560.png 560w"
+                    />
+                    <noscript>
+                        <img
+                            src="assets/profile/light-280.png"
+                            srcset="assets/profile/light-280.png 280w, assets/profile/light-560.png 560w"
+                            sizes="280px"
+                            alt="Sooraj Kumar S"
+                            width="560"
+                            height="560"
+                            decoding="async"
+                        />
+                    </noscript>
+                    <script>
+                        (function () {
+                            var heroImage = document.getElementById('hero-image');
+                            if (!heroImage) return;
+
+                            var theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+                            heroImage.setAttribute('src', heroImage.getAttribute('data-' + theme + '-src'));
+                            heroImage.setAttribute('srcset', heroImage.getAttribute('data-' + theme + '-srcset'));
+                        })();
+                    </script>
                 </div>
             </section>
 

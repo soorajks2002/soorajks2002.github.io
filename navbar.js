@@ -5,6 +5,31 @@ const THEME_ICON = `
   </svg>
 `;
 
+function getStoredTheme() {
+    try {
+        return localStorage.getItem('theme');
+    } catch (error) {
+        return null;
+    }
+}
+
+function syncThemeSensitiveMedia(activeTheme) {
+    const heroImage = document.getElementById('hero-image');
+    if (!heroImage) return;
+
+    const theme = activeTheme === 'dark' ? 'dark' : 'light';
+    const src = heroImage.getAttribute(`data-${theme}-src`);
+    const srcset = heroImage.getAttribute(`data-${theme}-srcset`);
+
+    if (src) {
+        heroImage.setAttribute('src', src);
+    }
+
+    if (srcset) {
+        heroImage.setAttribute('srcset', srcset);
+    }
+}
+
 // Navbar component for all pages
 function createNavbar(currentPage = '') {
     // Determine path prefix based on directory depth
@@ -64,20 +89,30 @@ function initializeThemeToggle() {
         }
     };
 
+    const applyTheme = (activeTheme, persistPreference = false) => {
+        const nextTheme = activeTheme === 'dark' ? 'dark' : 'light';
+        body.setAttribute('data-theme', nextTheme);
+        root.setAttribute('data-theme', nextTheme);
+        syncThemeSensitiveMedia(nextTheme);
+        updateButtonState(nextTheme);
+
+        if (persistPreference) {
+            try {
+                localStorage.setItem('theme', nextTheme);
+            } catch (error) {
+                // Ignore storage failures and keep the in-memory theme state.
+            }
+        }
+    };
+
     // Determine initial theme from documentElement (set by preload) or localStorage
-    const initial = root.getAttribute('data-theme') || localStorage.getItem('theme') || 'light';
-    body.setAttribute('data-theme', initial);
-    root.setAttribute('data-theme', initial);
-    updateButtonState(initial);
+    const initial = root.getAttribute('data-theme') || getStoredTheme() || 'light';
+    applyTheme(initial);
 
     themeToggle.addEventListener('click', () => {
         const currentTheme = root.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-        body.setAttribute('data-theme', newTheme);
-        root.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateButtonState(newTheme);
+        applyTheme(newTheme, true);
     });
 }
 
@@ -100,42 +135,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add a page-specific class to body for layout tweaks
     document.body.classList.add(`page-${currentPage || 'home'}`);
     insertNavbar(currentPage);
-
-    // Smooth page transitions
-    setupPageTransitions();
 });
-
-// Simple cross-page fade transition
-function setupPageTransitions() {
-    const body = document.body;
-
-    // Fade-in on load
-    body.classList.add('page-enter');
-    requestAnimationFrame(() => {
-        // Next frame: remove to transition to visible
-        body.classList.remove('page-enter');
-    });
-
-    // Delegate clicks for internal links to add fade-out
-    const anchors = Array.from(document.querySelectorAll('a[href]'));
-    anchors.forEach((a) => {
-        const url = new URL(a.href, window.location.href);
-        const isSameOrigin = url.origin === window.location.origin;
-        const isSamePageHash = url.pathname === window.location.pathname && url.hash;
-        const isExternal = a.target === '_blank' || a.href.startsWith('mailto:') || a.href.startsWith('tel:');
-
-        if (!isSameOrigin || isExternal || isSamePageHash) return;
-
-        a.addEventListener('click', (e) => {
-            // Only intercept left-click without modifier keys
-            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-            e.preventDefault();
-            const href = a.getAttribute('href');
-            body.classList.add('page-exit');
-            // Navigate after the transition
-            setTimeout(() => {
-                window.location.href = href;
-            }, 220);
-        });
-    });
-}

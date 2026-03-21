@@ -1,5 +1,4 @@
-/* Import Mozilla type scale, Geist Mono brand font, and icon font */
-@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Mozilla+Headline:wght@200..700&family=Mozilla+Text:wght@200..700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap');
+/* Shared site styles */
 
 /* Reset and base styles */
 * {
@@ -7,8 +6,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-/* Modern Sophisticated Theme Variables */
 
 /* Modern Sophisticated Theme Variables */
 :root {
@@ -116,7 +113,7 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--bg-color);
-    transition: background-color var(--duration-base) var(--ease-smooth), color var(--duration-base) var(--ease-smooth), opacity 220ms var(--ease-emphasis), transform 220ms var(--ease-emphasis);
+    transition: background-color var(--duration-base) var(--ease-smooth), color var(--duration-base) var(--ease-smooth);
     font-weight: var(--weight-body);
     letter-spacing: 0.006em;
     text-rendering: optimizeLegibility;
@@ -135,22 +132,9 @@ body {
     border: 0;
 }
 
-/* Page transition states */
-body.page-enter {
-    opacity: 0;
-    transform: translateY(12px) scale(0.995);
-}
-
-body.page-exit {
-    opacity: 0;
-    transform: translateY(10px) scale(0.995);
-}
-
 /* Top navigation bar */
 .top-nav {
     background: var(--bg-color);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     width: 100%;
 }
 
@@ -439,23 +423,6 @@ body.page-home .highlight {
     left: 50%;
     transform: translate(-50%, -50%);
     transition: opacity var(--duration-base) var(--ease-smooth);
-}
-
-/* Theme-based image switching */
-.hero-photo-light {
-    opacity: 1;
-}
-
-.hero-photo-dark {
-    opacity: 0;
-}
-
-[data-theme="dark"] .hero-photo-light {
-    opacity: 0;
-}
-
-[data-theme="dark"] .hero-photo-dark {
-    opacity: 1;
 }
 
 .photo-placeholder {
@@ -1048,12 +1015,6 @@ blockquote {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
-    }
-
-    body.page-enter,
-    body.page-exit {
-        opacity: 1;
-        transform: none;
     }
 }
 
