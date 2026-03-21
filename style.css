@@ -787,15 +787,8 @@ blockquote {
     outline-offset: 2px;
 }
 
-/* Techstack blocks */
-.stack-blocks {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-.stack-blocks .stack-block {
-    margin-bottom: 0;
+.stack-card p {
+    margin-bottom: 0.9rem;
 }
 
 .content ul.stack-pills {
@@ -812,16 +805,20 @@ blockquote {
     padding: 0.26rem 0.58rem;
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    background: var(--surface-elevated);
-    color: var(--text-color);
-    font-size: 0.82rem;
+    background: var(--bg-color);
+    color: var(--text-secondary);
+    font-family: var(--font-brand);
+    font-size: 0.76rem;
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.01em;
     line-height: 1.2;
-    transition: border-color var(--duration-fast) var(--ease-smooth), background-color var(--duration-fast) var(--ease-smooth);
+    transition: border-color var(--duration-fast) var(--ease-smooth), background-color var(--duration-fast) var(--ease-smooth), color var(--duration-fast) var(--ease-smooth);
 }
 
 .content ul.stack-pills li:hover {
     border-color: var(--accent-color);
     background: var(--surface-hover);
+    color: var(--text-color);
 }
 
 /* Projects pagination */
@@ -1123,18 +1120,13 @@ blockquote {
         gap: 1rem;
     }
 
-    .stack-blocks {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-    }
-
     .content ul.stack-pills {
-        gap: 0.34rem;
+        gap: 0.4rem;
     }
 
     .content ul.stack-pills li {
-        font-size: 0.78rem;
-        padding: 0.22rem 0.48rem;
+        font-size: 0.74rem;
+        padding: 0.34rem 0.62rem;
     }
 
     .projects-pagination {
