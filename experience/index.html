@@ -25,21 +25,25 @@
 
     <script>
       (function() {
+        var themePreference = 'system';
+        var resolvedTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         try {
-          var t = localStorage.getItem('theme');
-          if (!t) { t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
-          document.documentElement.setAttribute('data-theme', t);
+          var storedTheme = localStorage.getItem('theme');
+          themePreference = storedTheme === 'light' || storedTheme === 'dark' || storedTheme === 'system' ? storedTheme : 'system';
+          resolvedTheme = themePreference === 'dark' || (themePreference === 'system' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
         } catch (e) { /* ignore */ }
+        document.documentElement.setAttribute('data-theme', resolvedTheme);
+        document.documentElement.setAttribute('data-theme-preference', themePreference);
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Mozilla+Headline:wght@200..700&family=Mozilla+Text:wght@200..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Mozilla+Text:wght@200..700&display=block">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../style.css">
 </head>
 
-<body>
+<body class="page-experience">
     <div class="container">
         <div id="navbar-container"></div>
 
@@ -60,15 +64,15 @@
                         LLM inference, and user-facing copilots.
                     </p>
                     <ul>
-                        <li>Designed Paper2Code Agent, a system that converts research papers into fully working code repositories. Used LangGraph for agent orchestration and Daytona to safely run and test generated code in isolated environments.</li>
-                        <li>Co-developed the SciSpace Agent, a multi-agent research platform for end-to-end research (from literature review to report writing) using 50+ tools including computer control, sandbox, own-tools, and third-party research systems, reducing hours of manual work for researchers.</li>
-                        <li>Built SciSpace Notebooks, an AI-assisted writing platform for academics with 20+ AI features such as content generation, formatting, and citation management. Scaled the platform to support 120k+ AI actions daily.</li>
-                        <li>Contributed to Deep-Review, a conversational system that helps researchers perform literature reviews across 280M+ papers. Improved search accuracy by 60% compared to standard RAG by introducing distributed processing and custom ranking methods.</li>
-                        <li>Performed embedding migration for a Qdrant vector DB cluster containing 3B+ points and 15TB+ data from BGE to Gemma embeddings. Optimized the system to handle 1000+ QPS at 99.99% uptime for fast and reliable semantic search in the SciSpace Library.</li>
-                        <li>Fine-tuned Llama 3.2 3B using QLoRA to replace expensive rerankers. Deployed on AWS EC2 with auto-scaling through SGLang, achieving 300 RPS with sub-1s latency at lower cost.</li>
-                        <li>Designed multiple versions of SciSpace Copilot, a tool to chat with single or multiple academic papers. Enhanced retrieval and ranking, now supporting 60k+ daily queries.</li>
-                        <li>Developed a 2-speaker podcast generation tool simulating research paper discussions with LLM and TTS models, producing 6k+ podcasts monthly.</li>
-                        <li>Built SciSpace GPT, ranked #3 on OpenAI's Research GPT leaderboard, integrating SciSpace into ChatGPT and serving 10k+ daily queries.</li>
+                        <li>Designed <strong>Paper2Code Agent</strong>, a system that converts research papers into fully working code repositories. Used <strong>LangGraph</strong> for agent orchestration and <strong>Daytona</strong> to safely run and test generated code in isolated environments.</li>
+                        <li>Co-developed the <strong>SciSpace Agent</strong>, a multi-agent research platform for end-to-end research (from literature review to report writing) using <strong>50+ tools</strong> including computer control, sandbox, own-tools, and third-party research systems, reducing hours of manual work for researchers.</li>
+                        <li>Built <strong>SciSpace Notebooks</strong>, an AI-assisted writing platform for academics with 20+ AI features such as content generation, formatting, and citation management. Scaled the platform to support <strong>120k+ AI actions daily</strong>.</li>
+                        <li>Contributed to <strong>Deep-Review</strong>, a conversational system that helps researchers perform literature reviews across <strong>280M+ papers</strong>. Improved <strong>search accuracy by 60%</strong> compared to standard RAG by introducing distributed processing and custom ranking methods.</li>
+                        <li>Performed embedding migration for a Qdrant vector DB cluster containing <strong>3B+ points</strong> and <strong>15TB+ data</strong> from BGE to Gemma embeddings. Optimized the system to handle <strong>1000+ QPS</strong> at <strong>99.99% uptime</strong> for fast and reliable semantic search in the SciSpace Library.</li>
+                        <li>Fine-tuned <strong>Llama 3.2 3B</strong> using QLoRA to replace expensive rerankers. Deployed on AWS EC2 with auto-scaling through SGLang, achieving <strong>300 RPS</strong> with <strong>sub-1s latency</strong> at lower cost.</li>
+                        <li>Designed multiple versions of <strong>SciSpace Copilot</strong>, a tool to chat with single or multiple academic papers. Enhanced retrieval and ranking, now supporting <strong>60k+ daily queries</strong>.</li>
+                        <li>Developed a <strong>2-speaker podcast generation tool</strong> simulating research paper discussions with LLM and TTS models, producing <strong>6k+ podcasts monthly</strong>.</li>
+                        <li>Built <strong>SciSpace GPT</strong>, ranked <strong>#3 on OpenAI's Research GPT leaderboard</strong>, integrating SciSpace into ChatGPT and serving <strong>10k+ daily queries</strong>.</li>
                     </ul>
                 </article>
 
@@ -80,8 +84,8 @@
                         web intelligence, and LLM reasoning.
                     </p>
                     <ul>
-                        <li>Built the Ninja Career Counselor, an AI chatbot that delivered personalized career guidance across 50+ industries.</li>
-                        <li>Designed a pipeline combining RAG (built on 10k+ industry guidebooks), web search, user data, and LLMs to produce accurate, current, and context-rich responses.</li>
+                        <li>Built the <strong>Ninja Career Counselor</strong>, an AI chatbot that delivered personalized career guidance across <strong>50+ industries</strong>.</li>
+                        <li>Designed a pipeline combining <strong>RAG</strong> (built on <strong>10k+ industry guidebooks</strong>), web search, user data, and LLMs to produce <strong>accurate, current, and context-rich responses</strong>.</li>
                     </ul>
                 </article>
 
@@ -93,9 +97,9 @@
                         performance for SMB marketing workflows.
                     </p>
                     <ul>
-                        <li>Contributed to Shoot N Promote, implementing image segmentation and background replacement models to process 2k+ product images monthly and achieve 93% user satisfaction.</li>
-                        <li>Developed Text2Ad, an LLM-powered ad-copy tool generating 5k+ captions daily, delivering 40% higher engagement compared to human-written content.</li>
-                        <li>Built an ML pipeline to improve Meta Ads targeting by analyzing 2k+ keywords, increasing conversion rates and reducing customer acquisition cost by 18%.</li>
+                        <li>Contributed to <strong>Shoot N Promote</strong>, implementing image segmentation and background replacement models to process <strong>2k+ product images monthly</strong> and achieve <strong>93% user satisfaction</strong>.</li>
+                        <li>Developed <strong>Text2Ad</strong>, an LLM-powered ad-copy tool generating <strong>5k+ captions daily</strong>, delivering <strong>40% higher engagement</strong> compared to human-written content.</li>
+                        <li>Built an <strong>ML pipeline</strong> to improve Meta Ads targeting by analyzing <strong>2k+ keywords</strong>, increasing conversion rates and reducing <strong>customer acquisition cost by 18%</strong>.</li>
                     </ul>
                 </article>
             </section>

@@ -25,16 +25,20 @@
 
     <script>
       (function() {
+        var themePreference = 'system';
+        var resolvedTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         try {
-          var t = localStorage.getItem('theme');
-          if (!t) { t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
-          document.documentElement.setAttribute('data-theme', t);
+          var storedTheme = localStorage.getItem('theme');
+          themePreference = storedTheme === 'light' || storedTheme === 'dark' || storedTheme === 'system' ? storedTheme : 'system';
+          resolvedTheme = themePreference === 'dark' || (themePreference === 'system' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
         } catch (e) { /* ignore */ }
+        document.documentElement.setAttribute('data-theme', resolvedTheme);
+        document.documentElement.setAttribute('data-theme-preference', themePreference);
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Mozilla+Headline:wght@200..700&family=Mozilla+Text:wght@200..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Mozilla+Text:wght@200..700&display=block">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../style.css">
     <style>

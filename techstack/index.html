@@ -25,16 +25,20 @@
 
     <script>
       (function() {
+        var themePreference = 'system';
+        var resolvedTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         try {
-          var t = localStorage.getItem('theme');
-          if (!t) { t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
-          document.documentElement.setAttribute('data-theme', t);
+          var storedTheme = localStorage.getItem('theme');
+          themePreference = storedTheme === 'light' || storedTheme === 'dark' || storedTheme === 'system' ? storedTheme : 'system';
+          resolvedTheme = themePreference === 'dark' || (themePreference === 'system' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
         } catch (e) { /* ignore */ }
+        document.documentElement.setAttribute('data-theme', resolvedTheme);
+        document.documentElement.setAttribute('data-theme-preference', themePreference);
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Mozilla+Headline:wght@200..700&family=Mozilla+Text:wght@200..700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Mozilla+Text:wght@200..700&display=block">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../style.css">
 </head>
@@ -54,9 +58,6 @@
                 <article class="project stack-card">
                     <h3>AI Systems</h3>
                     <div class="project-meta">Models • Orchestration • Multimodal</div>
-                    <p>
-                        For agentic workflows, retrieval pipelines, model serving, and voice-driven product experiences.
-                    </p>
                     <ul class="stack-pills">
                         <li>LLMs</li>
                         <li>SLMs</li>
@@ -75,9 +76,6 @@
                 <article class="project stack-card">
                     <h3>Backend Systems</h3>
                     <div class="project-meta">APIs • Queues • Data</div>
-                    <p>
-                        The application layer I rely on to move from prototypes to dependable production systems.
-                    </p>
                     <ul class="stack-pills">
                         <li>SQL</li>
                         <li>FastAPI</li>
@@ -96,9 +94,6 @@
                 <article class="project stack-card">
                     <h3>Cloud Platform</h3>
                     <div class="project-meta">Compute • Storage • Scaling</div>
-                    <p>
-                        Core AWS services I use when deploying workloads that need predictable performance and scale.
-                    </p>
                     <ul class="stack-pills">
                         <li>AWS</li>
                         <li>EC2</li>
@@ -112,9 +107,6 @@
                 <article class="project stack-card">
                     <h3>Delivery &amp; Operations</h3>
                     <div class="project-meta">Containers • Automation • Workflow</div>
-                    <p>
-                        Tooling around build, release, and runtime operations that keeps delivery disciplined.
-                    </p>
                     <ul class="stack-pills">
                         <li>Docker</li>
                         <li>Kubernetes</li>
